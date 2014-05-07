@@ -73,10 +73,10 @@ module SimpleCalendar
                       if options[:not_empty_date]
                         concat options[:not_empty_date].call(date)
                       end
-                      divs << cur_events.collect{ |event| block.call(event) }
+                      divs << cur_events.collect{ |event| capture { block.call(event) } }
                     end
 
-                    divs.join.html_safe
+                    concat content_tag(:ul, divs.join.html_safe)
                   end #content_tag :div
                 end #content_tag :td
 
