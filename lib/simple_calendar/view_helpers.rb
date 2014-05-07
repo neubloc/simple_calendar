@@ -76,7 +76,11 @@ module SimpleCalendar
                       divs << cur_events.collect{ |event| block.call(event) }
                     end
 
-                    concat content_tag(:ul, divs.join.html_safe)
+                    if options[:event_wrapper]
+                      concat content_tag(options[:event_wrapper], divs.join.html_safe)
+                    else
+                      divs.join.html_safe
+                    end
                   end #content_tag :div
                 end #content_tag :td
 
